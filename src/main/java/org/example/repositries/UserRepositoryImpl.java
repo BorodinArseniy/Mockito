@@ -20,7 +20,7 @@ public class UserRepositoryImpl {
 
         return users.stream().
                 filter(user -> user.name == name).
-                findFirst().get();
+                findFirst().orElse(null);
 
     }
 

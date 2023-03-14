@@ -25,7 +25,6 @@ class UserServiceTest {
     @Test
     void shouldReturnFalse() {
 
-        when()
 
         User user = null;
         Assertions.assertFalse(UserService.checkUserExists(user));
