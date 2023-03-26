@@ -1,24 +1,17 @@
 package org.example.services;
 
 import org.example.User;
+import org.example.repositries.UserRepository;
 import org.example.repositries.UserRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.stubbing.Answer;
-
-import static org.example.repositries.UserRepositoryImpl.getUserByName;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-
-import static org.example.repositries.UserRepositoryImpl.users;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceTest {
     @Mock
-    private UserRepositoryImpl userRepository;
+    private UserRepository ur;
     @InjectMocks
     private UserService out;
 
@@ -26,29 +19,21 @@ class UserServiceTest {
     @Test
     void shouldReturnFalse() {
 
+        when(ur.getUserByName("user1")).thenReturn(null);
 
-
-        User user = null;
-
-
-
-        Assertions.assertFalse(out.checkUserExists(user));
-
-
+        boolean userExists = out.checkUserExists(new User("user1"));
+        Assertions.assertFalse(userExists);
 
     }
 
     @Test
     void shouldReturnTrue() {
 
+        when(ur.getUserByName("user1")).
+                thenReturn( new User("user1"));
 
-        User user = new User("user");
-
-        when(userRepository.users.contains(user)).thenReturn(true);
-
-
-        users.add(user);
-        Assertions.assertTrue(out.checkUserExists(user));
+        boolean userExists = out.checkUserExists(new User("user1"));
+        Assertions.assertTrue(userExists);
 
     }
 }
