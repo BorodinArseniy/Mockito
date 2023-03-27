@@ -2,20 +2,20 @@ package org.example.services;
 
 
 import org.example.User;
+import org.example.repositries.UserRepository;
 import org.example.repositries.UserRepositoryImpl;
 
 
 public class UserService {
 
-    static UserRepositoryImpl userRepository;
+    private final UserRepository userRepository;
 
-    public static boolean checkUserExists(User user){
-        for (User user1 : userRepository.users) {
-            if(user1 == user){
-                return true;
-            }
-        }
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-        return false;
+    public boolean checkUserExists(User user){
+
+        return userRepository.getUserByName(user.getName()) !=null;
     }
 }

@@ -5,28 +5,23 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import org.example.repositries.UserRepositoryImpl;
-
-import static org.example.repositries.UserRepositoryImpl.getUserByName;
-import static org.example.repositries.UserRepositoryImpl.users;
 
 class UserRepositoryImplTest {
 
+    private final UserRepository userRepository = new UserRepositoryImpl();
+
     @Test
-    void getUserByNameCheck() {
-        User user = new User("User");
-        users.add(user);
+    public void getUserByNameCheck() {
+        User user = userRepository.getUserByName("user1");
 
-        Assert.assertEquals(user.name,"User");
-
+        Assert.assertEquals(user.name,"user1");
 
     }
 
     @Test
-    void shouldReturnNull(){
-        Assertions.assertNull(getUserByName("not existing user"));
+    public void shouldReturnNull(){
+        Assertions.assertNull(userRepository.getUserByName("not existing user"));
     }
-
 
 
 }
