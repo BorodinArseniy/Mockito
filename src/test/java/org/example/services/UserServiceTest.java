@@ -4,9 +4,12 @@ import org.example.User;
 import org.example.repositries.UserRepository;
 import org.example.repositries.UserRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
@@ -14,6 +17,11 @@ class UserServiceTest {
     private UserRepository ur;
     @InjectMocks
     private UserService out;
+
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.initMocks(this);
+    }
 
 
     @Test
